@@ -1,13 +1,20 @@
-import React from 'react'
+import TodoList from '@/components/TodoList'
+import db from '@/utils/db'
 
+const getData = async () => {
+  // await new Promise((resolve, reject) => setTimeout(() => resolve(), 2000))
+  const todos = await db.todo.findMany({})
 
-console.log(process.argv);
+  return todos
+}
 
-
-const TodoPage = () => {
+const TodosPage = async () => {
+  const todos = await getData()
   return (
-    <div>Todos</div>
+    <div>
+      <TodoList todos={todos} />
+    </div>
   )
 }
 
-export default TodoPage
+export default TodosPage
